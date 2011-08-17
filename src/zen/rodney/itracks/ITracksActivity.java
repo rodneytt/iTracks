@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 public class ITracksActivity extends ListActivity {
@@ -38,6 +40,18 @@ public class ITracksActivity extends ListActivity {
 		int[] to = new int[] { R.id.name, R.id.created, R.id.desc };
 		SimpleCursorAdapter tracks = new SimpleCursorAdapter(this, R.layout.track_row, mTrackCursor, from, to);
 		setListAdapter(tracks);
+	}
+
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Log.d(TAG, "onListItemClick.");
+		super.onListItemClick(l, v, position, id);
+		Cursor c = mTrackCursor;
+		c.moveToPosition(position);
+		Intent i = new Intent(this, ShowTrack.class);
+		i.putExtra(TrackDbAdapter.KEY_ROWID, id);
+		i.putExtra(TrackDbAdapter.NAME, c.getString(c.getColumnIndexOrThrow(TrackDbAdapter.NAME)));
+		i.putExtra(TrackDbAdapter.DESC, c.getString(c.getColumnIndexOrThrow(TrackDbAdapter.DESC)));
+		startActivity(i);
 	}
 
 	@Override

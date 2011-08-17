@@ -16,6 +16,13 @@
 		<activity android:name="Setting"></activity>
 		<activity android:name="Helps"></activity>
 		<activity android:name="ShowTrack"></activity>
+		
+		<service android:name=".Track">
+			<intent-filter>
+				<action android:name="zen.rodney.itracks.START_TRACK_SERVICE" />
+				<category android:name="android.intent.category.default" />
+			</intent-filter>
+		</service>
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
