@@ -3,10 +3,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
 
-	<view android:id="@+id/mv" class="com.google.android.maps.MapView"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:apiKey="0dl52uC3Uu_p544VCF3jhI_7CuiRLCNlQUt3orA" />
-
+	<com.google.android.maps.MapView
+		android:id="@+id/mv" android:layout_width="fill_parent"
+		android:clickable="true" android:enabled="true" android:layout_height="fill_parent"
+		android:apiKey="0dl52uC3Uu_p8zHsnWxLEsGFRXt6RRx0OHA22LQ" />
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:orientation="horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:background="#550000ff"

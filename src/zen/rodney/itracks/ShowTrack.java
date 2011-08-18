@@ -5,7 +5,6 @@
 
 package zen.rodney.itracks;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -29,12 +28,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 
-public class ShowTrack extends Activity {
+public class ShowTrack extends MapActivity {
 	private static final int MENU_NEW = Menu.FIRST + 1;
 	private static final int MENU_CON = MENU_NEW + 1;
 	private static final int MENU_DEL = MENU_CON + 1;
@@ -73,10 +73,10 @@ public class ShowTrack extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.show_track);
 		findViews();
-		//centerOnGPSPosition();
-		//revArgs();
-		//paintLocates();
-		//startTrackService();
+		centerOnGPSPosition();
+		revArgs();
+		paintLocates();
+		startTrackService();
 	}
 
 	private void paintLocates() {
@@ -243,7 +243,9 @@ public class ShowTrack extends Activity {
 		String provider = "gps";
 		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		Location loc = lm.getLastKnownLocation(provider);
-
+		if (loc == null) {
+			return;
+		}
 		mDefPoint = new GeoPoint((int) (loc.getLatitude() * 1000000), (int) (loc.getLongitude() * 1000000));
 		mDefCaption = "I'm here.";
 		mc.animateTo(mDefPoint);
@@ -407,5 +409,10 @@ public class ShowTrack extends Activity {
 		Log.d(TAG, "onDestroy.");
 		super.onDestroy();
 		stopTrackService();
+	}
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		return false;
 	}
 }
