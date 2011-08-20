@@ -7,6 +7,7 @@ package zen.rodney.itracks;
 
 import android.app.Service;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -35,7 +36,17 @@ public class Track extends Service {
 		Log.e(TAG, "track_id:" + track_id);
 		lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		locationListener = new MyLocationListener();
-		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		// 查找到服务信息
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_FINE); // 高精度
+		criteria.setAltitudeRequired(false);
+		criteria.setBearingRequired(false);
+		criteria.setCostAllowed(true);
+		criteria.setPowerRequirement(Criteria.POWER_LOW); // 低功耗
+
+		String provider = lm.getBestProvider(criteria, true); // 获取GPS信息
+
+		lm.requestLocationUpdates(provider, 100 * 1000, 500, locationListener);
 
 	}
 

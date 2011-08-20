@@ -33,8 +33,10 @@ public class LocateDbAdapter extends DbAdapter {
 	}
 
 	public LocateDbAdapter open() {
-		mDbHelper = new DatabaseHelper(mCtx);
-		mDb = mDbHelper.getWritableDatabase();
+		if (mDbHelper == null) {
+			mDbHelper = new DatabaseHelper(mCtx);
+			mDb = mDbHelper.getWritableDatabase();
+		}
 		return this;
 	}
 

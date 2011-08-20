@@ -68,7 +68,8 @@ public class TrackDbAdapter extends DbAdapter {
 				+ calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND);
 		initValues.put(CREATED, created);
 		initValues.put(UPDATED, created);
-		return mDb.insert(TABLE_NAME, null, initValues);
+		long track_id = mDb.insert(TABLE_NAME, null, initValues);
+		return track_id;
 	}
 
 	public boolean deleteTrack(long rowId) {
