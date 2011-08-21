@@ -194,7 +194,7 @@ public class ShowTrack extends MapActivity {
 		});
 		lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		locationListener = new MyLocationListener();
-		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10 * 60 * 1000, 500, locationListener);
 	}
 
 	public void toggleStreetView() {

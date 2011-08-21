@@ -46,7 +46,7 @@ public class Track extends Service {
 
 		String provider = lm.getBestProvider(criteria, true); // 获取GPS信息
 
-		lm.requestLocationUpdates(provider, 100 * 1000, 500, locationListener);
+		lm.requestLocationUpdates(provider, 10 * 60 * 1000, 500, locationListener);
 
 	}
 
